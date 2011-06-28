@@ -33,4 +33,9 @@ class SolveProblemSixTest extends GroovyTestCase {
 		def sqSum = squareSum(10)
 		assertEquals 3025, sqSum
 	}
+	
+	void test_get_answer() {
+		def diff = diffSums(100)
+		println diff
+	}
 }
