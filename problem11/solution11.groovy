@@ -21,11 +21,35 @@ class Test extends GroovyTestCase {
     20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
     01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48'''
     
-    def a = data.split(' ')
+    def a = data.replace('\n', '').replace('    ', ' ').split(' ')
+
+	int getIndex(row, column) {
+		(column - 1) + (20 * (row - 1))
+	}
 
 	int getCell(row, column) {
-		//Integer.parseInt(a)
-		8
+		def value = a[getIndex(row, column)]
+		Integer.parseInt(value)
+	}
+
+	void test_1_1_is_0() {
+		def i = getIndex(1, 1)
+		assertEquals 0, i
+	}
+	
+	void test_1_2_is_1() {
+		def i = getIndex(1, 2)
+		assertEquals 1, i
+	}
+	
+	void test_2_1_is_20() {
+		def i = getIndex(2, 1)
+		assertEquals 20, i
+	}
+	
+	void test_3_3_is_42() {
+		def i = getIndex(3, 3)
+		assertEquals 42, i
 	}
 
 	void test_get_cell_simple() {
@@ -33,7 +57,12 @@ class Test extends GroovyTestCase {
 		assertEquals 8, value
 	}
 	
-    void no_test_get_cell() {    
+	void test_get_cell_3_3() {
+		def value = getCell(3, 3)
+		assertEquals 31, value
+	}
+	
+    void test_get_cell() {    
 	  	def value = getCell(7, 9)
 		assertEquals 26, value
     }
