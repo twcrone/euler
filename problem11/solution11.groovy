@@ -53,13 +53,38 @@ class Test extends GroovyTestCase {
 	}
 
 	int getDiagonalProduct(row, column) {
-		if(column > 16) return 0
+		if(column > 16 || row > 16) return 0
 		
 		def val1 = getCell(row, column)
 		def val2 = getCell(row + 1, column + 1)
 		def val3 = getCell(row + 2, column + 2)
 		def val4 = getCell(row + 3, column + 3)
 		val1*val2*val3*val4
+	}
+
+	int getLargestProduct(row, column) {
+		def right = getRightProduct(row, column)
+		def down = getCellsDown(row, column)
+		def diagonal = getDiagonalProduct(row, column)
+		def largest = right > down ? right : down
+		largest = diagonal > largest ? diagonal : largest
+		return largest
+	}
+
+	int getLargestProduct() {
+		def largest = 0
+		def next = 0
+		(1..20).each { row ->
+			(1..20).each { column ->
+				next = getLargestProduct(row, column)
+				largest = next > largest ? next : largest
+			}
+		}
+		largest
+	}
+
+	void test_solve() {
+		println getLargestProduct()
 	}
 
 	void test_get_diagonal_product() {
