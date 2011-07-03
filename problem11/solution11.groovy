@@ -52,7 +52,7 @@ class Test extends GroovyTestCase {
 		val1*val2*val3*val4
 	}
 
-	int getDiagonalProduct(row, column) {
+	int getDiagonalRightProduct(row, column) {
 		if(column > 16 || row > 16) return 0
 		
 		def val1 = getCell(row, column)
@@ -62,12 +62,24 @@ class Test extends GroovyTestCase {
 		val1*val2*val3*val4
 	}
 
+	int getDiagonalLeftProduct(row, column) {
+		if(column < 4 || row > 16) return 0
+		
+		def val1 = getCell(row, column)
+		def val2 = getCell(row + 1, column - 1)
+		def val3 = getCell(row + 2, column - 2)
+		def val4 = getCell(row + 3, column - 3)
+		val1*val2*val3*val4
+	}
+
 	int getLargestProduct(row, column) {
 		def right = getRightProduct(row, column)
 		def down = getCellsDown(row, column)
-		def diagonal = getDiagonalProduct(row, column)
+		def diagonalRight = getDiagonalRightProduct(row, column)
+		def diagonalLeft = getDiagonalLeftProduct(row, column)
 		def largest = right > down ? right : down
-		largest = diagonal > largest ? diagonal : largest
+		largest = diagonalRight > largest ? diagonalRight : largest
+		largest = diagonalLeft > largest ? diagonalLeft : largest
 		return largest
 	}
 
@@ -89,13 +101,13 @@ class Test extends GroovyTestCase {
 
 	void test_get_diagonal_product() {
 		def expected = 26*63*78*14
-		def actual = getDiagonalProduct(7, 9)
+		def actual = getDiagonalRightProduct(7, 9)
 		assertEquals expected, actual 
 	}
 
 	void test_get_diagonal_product_not_enough_rows() {
 		def expected = 0
-		def actual = getDiagonalProduct(1, 18)
+		def actual = getDiagonalRightProduct(1, 18)
 		assertEquals expected, actual 
 	}
 
