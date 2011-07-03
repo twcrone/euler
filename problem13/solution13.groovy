@@ -26,6 +26,18 @@ class Test extends GroovyTestCase {
 		sumDrop(getNumsForIndex(a, i))
 	}
 
+	def getSumDropForIndexWithCarryOver(a, i, c) {
+		def nums = getNumsForIndex(a, i)
+		nums << c
+		sumDrop(nums)
+	}
+
+	void test_get_sum_drop_for_index_with_carry_over() {
+		def a = ["123", "234", "456"]
+		def sumDrop = getSumDropForIndexWithCarryOver(a, 2, 21)
+		assertEquals 3, sumDrop
+	}
+
 	void test_get_sum_drop_for_index() {
 		def a = ["123", "234", "456"]
 		def sumDrop = getSumDropForIndex(a, 2)
