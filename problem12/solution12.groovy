@@ -31,6 +31,7 @@ class Test extends GroovyTestCase {
 			}
 			n++
 		}
+		assertEquals 76576500, t
 	}
 	
 	void test_get_triangle() {
