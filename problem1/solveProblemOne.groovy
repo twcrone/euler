@@ -4,4 +4,4 @@ def sum = 0
 		sum += it 
 	} 
 }
-println sum
+println "$sum should be 234168"
