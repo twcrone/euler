@@ -32,16 +32,6 @@ class Test extends GroovyTestCase {
 		Integer.parseInt(value)
 	}
 
-	int getCellsUp(row, column) {
-		if(row < 4) return 0
-		
-		def val1 = getCell(row, column)
-		def val2 = getCell(row - 1, column)
-		def val3 = getCell(row - 2, column)
-		def val4 = getCell(row - 3, column)
-		val1*val2*val3*val4
-	}
-
 	int getCellsDown(row, column) {
 		if(row > 16) return 0
 		
@@ -52,23 +42,40 @@ class Test extends GroovyTestCase {
 		val1*val2*val3*val4
 	}
 
+	int getRightProduct(row, column) {
+		if(column > 16) return 0
+		
+		def val1 = getCell(row, column)
+		def val2 = getCell(row, column + 1)
+		def val3 = getCell(row, column + 2)
+		def val4 = getCell(row, column + 3)
+		val1*val2*val3*val4
+	}
+
+	void test_get_right_product() {
+		def expected = 8*2*22*97
+		def actual = getRightProduct(1, 1)
+		assertEquals expected, actual 
+	}
+
+	void test_get_right_product_not_enough_rows() {
+		def expected = 0
+		def actual = getRightProduct(1, 18)
+		assertEquals expected, actual 
+	}
+
+	void test_get_cells_down_not_enough_rows() {
+		def expected = 0
+		def actual = getCellsDown(17, 4)
+		assertEquals expected, actual 
+	}
+
 	void test_get_cells_down() {
 		def expected = 26*95*97*20
 		def actual = getCellsDown(7, 9)
 		assertEquals expected, actual 
 	}
 
-	void test_get_cells_up() {
-		def expected = 8*49*81*52
-		def actual = getCellsUp(4, 1)
-		assertEquals expected, actual 
-	}
-
-	void test_get_cells_not_enough_rows() {
-		def expected = 0
-		def actual = getCellsUp(1, 1)
-		assertEquals expected, actual 
-	}
 	void test_1_1_is_0() {
 		def i = getIndex(1, 1)
 		assertEquals 0, i
