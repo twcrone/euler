@@ -19,22 +19,25 @@ def countDivisors(n : Int)= {
 	
 	count
 }
-// def t = getTriangle(7)
-// println(t)
-// println(countDivisors(t))
-println("Starting...")
-var n = 1
-var t = 0
-var d = 0
 
-while(true) {
-	t = getTriangle(n)
-	d = countDivisors(t)
-	println("n=" + n + ",t=" + t + ",d=" + d)
-	if(d > 500) {
-		println(t)
-		System.exit(0)
+def solveProblem(targetCount : Int)= {
+	var n = 1
+	var t = 0
+	var d = 0
+	var continue = true
+	
+	while(continue) {
+		t = getTriangle(n)
+		d = countDivisors(t)
+		println("n=" + n + ",t=" + t + ",d=" + d)
+		if(d > targetCount) {
+			continue = false
+		}
+		n = n + 1
 	}
-	n = n + 1
+	t
 }
 
+val solution = solveProblem(500)
+println("Solution is " + solution)
+println("Should have been 76576500")
