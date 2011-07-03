@@ -52,6 +52,28 @@ class Test extends GroovyTestCase {
 		val1*val2*val3*val4
 	}
 
+	int getDiagonalProduct(row, column) {
+		if(column > 16) return 0
+		
+		def val1 = getCell(row, column)
+		def val2 = getCell(row + 1, column + 1)
+		def val3 = getCell(row + 2, column + 2)
+		def val4 = getCell(row + 3, column + 3)
+		val1*val2*val3*val4
+	}
+
+	void test_get_diagonal_product() {
+		def expected = 26*63*78*14
+		def actual = getDiagonalProduct(7, 9)
+		assertEquals expected, actual 
+	}
+
+	void test_get_diagonal_product_not_enough_rows() {
+		def expected = 0
+		def actual = getDiagonalProduct(1, 18)
+		assertEquals expected, actual 
+	}
+
 	void test_get_right_product() {
 		def expected = 8*2*22*97
 		def actual = getRightProduct(1, 1)
