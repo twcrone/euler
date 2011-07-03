@@ -18,6 +18,17 @@ class Test extends GroovyTestCase {
 		a.collect{ it[i] }
 	}
 
+	def getNumsForIndex(a, i) {
+		transformToInts(getNumStrsForIndex(a, i))
+	}
+
+	void test_get_nums() {
+		def a = ["123", "234", "456"]
+		def numStrs = getNumsForIndex(a, 1)
+		def expected = [2,3,5]
+		assertEquals expected, numStrs
+	}
+
 	void test_get_num_strs() {
 		def a = ["123", "234", "456"]
 		def numStrs = getNumStrsForIndex(a, 0)
