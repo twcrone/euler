@@ -17,9 +17,19 @@ class Test extends GroovyTestCase {
 	def getNumStrsForIndex(a, i) {
 		a.collect{ it[i] }
 	}
-
+	
 	def getNumsForIndex(a, i) {
 		transformToInts(getNumStrsForIndex(a, i))
+	}
+	
+	def getSumDropForIndex(a, i) {
+		sumDrop(getNumsForIndex(a, i))
+	}
+
+	void test_get_sum_drop_for_index() {
+		def a = ["123", "234", "456"]
+		def sumDrop = getSumDropForIndex(a, 2)
+		assertEquals 1, sumDrop
 	}
 
 	void test_get_nums() {
