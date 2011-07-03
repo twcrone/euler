@@ -1,5 +1,10 @@
 class Test extends GroovyTestCase {
 
+	def parseData() {
+		def a = data.split('\n')
+		a
+	}
+
 	def transformToInts(numStrs) {
 		numStrs.collect{ Integer.parseInt(it) }
 	}
@@ -9,8 +14,19 @@ class Test extends GroovyTestCase {
 		sum / 10
 	}
 
+	def getNumStrsForIndex(a, i) {
+		a.collect{ it[i] }
+	}
+
+	void test_get_num_strs() {
+		def a = ["123", "234", "456"]
+		def numStrs = getNumStrsForIndex(a, 0)
+		def expected = ['1','2','4']
+		assertEquals expected, numStrs
+	}
+
 	void test_parse_data() {
-		def a = data.split('\n')
+		def a = parseData()
 		assertEquals 100, a.length
 		assertEquals '3', a[0][0]
 	}
