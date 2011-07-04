@@ -1,17 +1,20 @@
 class Test extends GroovyTestCase {
 
 	def parseData() {
-		def a = data.split('\n')
-		a
+		data.split('\n').collect{ s -> s.trim() }
 	}
 
 	def transformToInts(numStrs) {
 		numStrs.collect{ Integer.parseInt(it) }
 	}
 	
-	int sumDrop(nums) {
+	int sumDrop(nums, maxDigits = 10) {
 		int sum = nums.sum()
-		sum / 10
+		int digits = Integer.toString(sum).length()
+		if(digits > maxDigits) {
+			sum = sum / (10 * (digits - maxDigits))
+		}
+		sum
 	}
 
 	def getNumStrsForIndex(a, i) {
@@ -22,25 +25,40 @@ class Test extends GroovyTestCase {
 		transformToInts(getNumStrsForIndex(a, i))
 	}
 	
-	def getSumDropForIndex(a, i) {
-		sumDrop(getNumsForIndex(a, i))
+	def getSumDropForIndex(a, i, maxDigits = 10) {
+		sumDrop(getNumsForIndex(a, i), maxDigits)
 	}
 
-	def getSumDropForIndexWithCarryOver(a, i, c) {
+	def getSumDropForIndexWithCarryOver(a, i, c, maxDigits = 10) {
 		def nums = getNumsForIndex(a, i)
 		nums << c
-		sumDrop(nums)
+		sumDrop(nums, maxDigits)
 	}
-
+	
+	def getSumDropForAllData(a) {
+		(0..49).inject(0) { sum, i ->
+			sum = getSumDropForIndexWithCarryOver(a, i, sum)
+		}
+	}
+	
+	void test_solve() {
+		println getSumDropForAllData(parseData())
+	}
+	
+	void test_sum_drop() {
+		def sum = sumDrop([1,2,3,4,5,100], 2)
+		assertEquals 11, sum
+	}
+	
 	void test_get_sum_drop_for_index_with_carry_over() {
 		def a = ["123", "234", "456"]
-		def sumDrop = getSumDropForIndexWithCarryOver(a, 2, 21)
+		def sumDrop = getSumDropForIndexWithCarryOver(a, 2, 21, 1)
 		assertEquals 3, sumDrop
 	}
 
 	void test_get_sum_drop_for_index() {
 		def a = ["123", "234", "456"]
-		def sumDrop = getSumDropForIndex(a, 2)
+		def sumDrop = getSumDropForIndex(a, 2, 1)
 		assertEquals 1, sumDrop
 	}
 
@@ -60,7 +78,7 @@ class Test extends GroovyTestCase {
 
 	void test_parse_data() {
 		def a = parseData()
-		assertEquals 100, a.length
+		assertEquals 100, a.size()
 		assertEquals '3', a[0][0]
 	}
 	
@@ -73,13 +91,13 @@ class Test extends GroovyTestCase {
 	
 	void test_add_all_and_drop_ones_place() {
 		def nums = [1,2,3,4]
-		def sumDrop = sumDrop(nums)
+		def sumDrop = sumDrop(nums, 1)
 		assertEquals 1, sumDrop
 	}
 	
 	void test_add_all_and_drop_ones_place_with_carry_over() {
 		def nums = [100,1,2,3,4,5,6,7,8,9,10]
-		def sumDrop = sumDrop(nums)
+		def sumDrop = sumDrop(nums, 2)
 		assertEquals 15, sumDrop
 	}
 	
