@@ -4,101 +4,19 @@ class Test extends GroovyTestCase {
 		data.split('\n').collect{ s -> s.trim() }
 	}
 
-	def transformToInts(numStrs) {
-		numStrs.collect{ Integer.parseInt(it) }
-	}
-	
-	int sumDrop(nums, maxDigits = 10) {
-		int sum = nums.sum()
-		int digits = Integer.toString(sum).length()
-		if(digits > maxDigits) {
-			sum = sum / (10 * (digits - maxDigits))
+	void test_sum_all() {
+		def a = parseData()
+		def sumAll = a.inject(BigInteger.ZERO) { sum, s ->
+			println sum
+			sum = sum.add(new BigInteger(s))
 		}
-		sum
-	}
-
-	def getNumStrsForIndex(a, i) {
-		a.collect{ it[i] }
-	}
-	
-	def getNumsForIndex(a, i) {
-		transformToInts(getNumStrsForIndex(a, i))
-	}
-	
-	def getSumDropForIndex(a, i, maxDigits = 10) {
-		sumDrop(getNumsForIndex(a, i), maxDigits)
-	}
-
-	def getSumDropForIndexWithCarryOver(a, i, c, maxDigits = 10) {
-		def nums = getNumsForIndex(a, i)
-		nums << c
-		sumDrop(nums, maxDigits)
-	}
-	
-	def getSumDropForAllData(a) {
-		(0..49).inject(0) { sum, i ->
-			sum = getSumDropForIndexWithCarryOver(a, i, sum)
-		}
-	}
-	
-	void test_solve() {
-		println getSumDropForAllData(parseData())
-	}
-	
-	void test_sum_drop() {
-		def sum = sumDrop([1,2,3,4,5,100], 2)
-		assertEquals 11, sum
-	}
-	
-	void test_get_sum_drop_for_index_with_carry_over() {
-		def a = ["123", "234", "456"]
-		def sumDrop = getSumDropForIndexWithCarryOver(a, 2, 21, 1)
-		assertEquals 3, sumDrop
-	}
-
-	void test_get_sum_drop_for_index() {
-		def a = ["123", "234", "456"]
-		def sumDrop = getSumDropForIndex(a, 2, 1)
-		assertEquals 1, sumDrop
-	}
-
-	void test_get_nums() {
-		def a = ["123", "234", "456"]
-		def numStrs = getNumsForIndex(a, 1)
-		def expected = [2,3,5]
-		assertEquals expected, numStrs
-	}
-
-	void test_get_num_strs() {
-		def a = ["123", "234", "456"]
-		def numStrs = getNumStrsForIndex(a, 0)
-		def expected = ['1','2','4']
-		assertEquals expected, numStrs
+		println "Sum All -> $sumAll"
 	}
 
 	void test_parse_data() {
 		def a = parseData()
 		assertEquals 100, a.size()
 		assertEquals '3', a[0][0]
-	}
-	
-	void test_transform_to_ints() {
-		def numStrs = ["1", "2", "3"]
-		def expected = [1,2,3]
-		def transformed = transformToInts(numStrs)
-		assertEquals expected, transformed
-	}
-	
-	void test_add_all_and_drop_ones_place() {
-		def nums = [1,2,3,4]
-		def sumDrop = sumDrop(nums, 1)
-		assertEquals 1, sumDrop
-	}
-	
-	void test_add_all_and_drop_ones_place_with_carry_over() {
-		def nums = [100,1,2,3,4,5,6,7,8,9,10]
-		def sumDrop = sumDrop(nums, 2)
-		assertEquals 15, sumDrop
 	}
 	
 	def data = '''37107287533902102798797998220837590246510135740250
