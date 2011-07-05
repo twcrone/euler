@@ -1,8 +1,8 @@
 class Test extends GroovyTestCase {
 	
 	def isPrime(BigInteger num, primes) {
-		def factor = primes.find{ num.mod(it) == BigInteger.ZERO }
-		//def factor = findFactor(num, primes)
+		//def factor = primes.find{ num.mod(it) == BigInteger.ZERO }
+		def factor = findFactor(num, primes)
 		def isPrime =  factor == null
 		if(isPrime) {
 			primes << num
@@ -10,10 +10,13 @@ class Test extends GroovyTestCase {
 		isPrime
 	}
 	
-/*	
 	def findFactor(BigInteger num, primes) {
+		if(primes.isEmpty()) {
+			return null
+		}
+		
 		def i = 0
-		def f = primes[i]
+		BigInteger f = primes[i]
 		def max = num.add(BigInteger.ONE)
 		while(f.pow(2).compareTo(max) == -1) {
 			if(num.mod(f) == BigInteger.ZERO) {
@@ -23,7 +26,7 @@ class Test extends GroovyTestCase {
 		}
 		null
 	}
-*/	
+
 	def sumPrimesBelow(BigInteger num) {
 		def max = num.add(BigInteger.ONE)
 		def primes = []
@@ -40,7 +43,7 @@ class Test extends GroovyTestCase {
 		sum
 	}
 
-	def sumPrimesBelowAlt(BigInteger num) {
+	def sumPrimesBelowCheat(BigInteger num) {
 		def next = new BigInteger("2")
 		def sum = BigInteger.ZERO
 		
@@ -52,8 +55,8 @@ class Test extends GroovyTestCase {
 		sum
 	}
 		
-	void xtest_solve() {
-		println "Answer is" + sumPrimesBelowAlt(2000000)
+	void test_solve() {
+		println "Answer is" + sumPrimesBelow(2000000)
 		println "Answer should be 142913828922"
 	}
 
