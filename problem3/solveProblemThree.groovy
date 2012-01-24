@@ -13,7 +13,7 @@ def isPrime(BigInteger num) {
 	true
 }
 
-
+def start = System.currentTimeMillis()
 BigInteger num = 600851475143
 BigInteger factor = 0
 BigInteger temp = num
@@ -30,7 +30,8 @@ for(def i = 2; i < temp; ++i) {
 		}
 	}
 }
-
+def end = System.currentTimeMillis()
 println factor
+println "Elapsed time ${end - start}"
 
 

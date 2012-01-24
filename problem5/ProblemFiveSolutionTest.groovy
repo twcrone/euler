@@ -23,6 +23,9 @@ class Test extends GroovyTestCase {
 	}
 	
 	void test_solution() {
+		def start = System.currentTimeMillis()
 		println solveFor(20)
+		def end = System.currentTimeMillis()
+		println "Elapsed time ${end - start} milliseconds"
 	}
 }
