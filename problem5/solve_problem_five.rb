@@ -2,13 +2,13 @@ require "test/unit"
 
 def solve_for(upper)
   answer = upper
-  until divisible_by_numbers_up_to(answer, upper)  do
+  until divisible_by_numbers_up_to?(answer, upper)  do
     answer += upper
   end
   answer
 end
 
-def divisible_by_numbers_up_to(number, upper)
+def divisible_by_numbers_up_to?(number, upper)
   (2..upper).all? { |i| number % i == 0 }
 end
 
