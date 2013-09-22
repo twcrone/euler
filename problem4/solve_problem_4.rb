@@ -20,7 +20,7 @@ def find_largest_palindromic_number(digits)
   return answer
 end
 
-class TestSimpleNumber < Test::Unit::TestCase
+class SolveProblemFourTests < Test::Unit::TestCase
 
   def test_is_palindromic_number
     assert is_palindromic_number(1001)
