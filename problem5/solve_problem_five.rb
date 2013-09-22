@@ -1,18 +1,12 @@
 require "test/unit"
 
 def solve_for(upper)
-  answer = upper
-  until divisible_by_numbers_up_to?(answer, upper)  do
-    answer += upper
+  (upper..Float::INFINITY).step(upper).find do |num|
+    (2..upper).all? { |i| num.modulo(i).zero? }
   end
-  answer
 end
 
-def divisible_by_numbers_up_to?(number, upper)
-  (2..upper).all? { |i| number % i == 0 }
-end
-
-class SolveProblemXTests < Test::Unit::TestCase
+class SolveProblemFiveTests < Test::Unit::TestCase
 
   def test_simple_case
     solution = solve_for(2)
