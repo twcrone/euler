@@ -17,4 +17,10 @@ class SolveProblem16Tests < Test::Unit::TestCase
     answer = solve(num)
     assert_equal 26, answer
   end
+
+  def test_solve
+    num = 2 ** 1000
+    answer = solve(num)
+    puts answer
+  end
 end
