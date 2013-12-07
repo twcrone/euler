@@ -37,6 +37,7 @@ class Grid {
 
 
   private int calculateAllNextHeads(List heads) {
+    int moves = 0;
     List allNextHeads = new ArrayList();
     List nextHeads;
     for(Object head : heads) {
