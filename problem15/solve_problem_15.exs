@@ -1,11 +1,13 @@
-defmodule Hello do
-  IO.puts "Defining the function world"
-
-  def world do
-    IO.puts "Hello World"
+defmodule Pascal do
+  def pascal(m, n) do
+    if(n == 1) do
+      (m+1)
+    else
+      pascal(m, n - 1) * (m + n) / n
+    end
   end
-
-  IO.puts "Function world defined"
 end
 
-Hello.world
+sum = Pascal.pascal(20, 20)
+
+IO.puts "#{sum}"
