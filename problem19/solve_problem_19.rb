@@ -11,6 +11,13 @@ describe SundayCalculator, "#sunday?" do
     sunday = calc.sunday?(1900, 1, 1)
     expect(sunday).to eq(false)
   end
+
+  it "returns true for Jan 6, 1900" do
+    calc = SundayCalculator.new()
+    sunday = calc.sunday?(1900, 1, 6)
+    expect(sunday)
+  end
+
 end
 
 
