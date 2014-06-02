@@ -38,11 +38,13 @@ describe SundayCalculator do
       [ 2000, true  ],
       [ 1901, false ],
       [ 1900, false ],
+      [ 1600, true  ],
+      [ 1644, true  ],
 
     ].each do | year, expected |
       it "#{year} is #{'NOT' unless expected} a leap year" do
-      actual = calc.leap_year?(year)
-      expect(actual).to eq(expected)
+        actual = calc.leap_year?(year)
+        expect(actual).to eq(expected)
       end
     end
     
