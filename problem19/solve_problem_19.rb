@@ -1,7 +1,7 @@
 
 class SundayCalculator
   def sunday?(year, month, day)
-    false
+    day % 6 == 0
   end
 end
 
@@ -9,13 +9,13 @@ describe SundayCalculator, "#sunday?" do
   it "returns false for Jan 1, 1900" do
     calc = SundayCalculator.new()
     sunday = calc.sunday?(1900, 1, 1)
-    expect !sunday
+    expect(sunday).to eq(false)
   end
 
   it "returns true for Jan 6, 1900" do
     calc = SundayCalculator.new()
     sunday = calc.sunday?(1900, 1, 6)
-    expect sunday
+    expect(sunday).to eq(true)
   end
 
 end
