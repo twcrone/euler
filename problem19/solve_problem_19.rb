@@ -9,63 +9,24 @@ end
 describe SundayCalculator, "#sunday?" do
   
   let(:calc) { SundayCalculator.new() }
+  let(:data) do 
+    [
+      # year, month, day_of_month, expected_is_sunday
+      [ 1900,  1,  1, false],
+      [ 1900,  1,  6, true]
+    ]
+  end
 
   it "returns false for Jan 1, 1900" do
-    sunday = calc.sunday?(1900, 1, 1)
-    expect(sunday).to eq(false)
+    data.each do |row|
+      year = row[0]
+      month = row[1]
+      day = row[2]
+      expected = row[3]
+      actual = calc.sunday?(year, month, day)
+      expect(actual).to eq(expected)
+    end
+
   end
-
-  it "returns true for Jan 6, 1900" do
-    sunday = calc.sunday?(1900, 1, 6)
-    expect(sunday).to eq(true)
-  end
-
-
 
 end
-
-
-
-#require "test/unit"
-#
-#class SolveProblemXTests < Test::Unit::TestCase
-#
-#  def sunday?(year, month, day)
-#		false
-#	end
-#
-#	def leap_year?(year)
-#		year.modulo(4).zero?
-#	end
-#
-#	def days_in_month(year, month)
-#		case month
-#		when 2
-#		  if leap_year?(year)
-#				return 29
-#			else
-#				return 28
-#			end
-#		when 9
-#			return 30
-#		when 4
-#			return 30
-#		when 6
-#			return 30
-#		when 11
-#			return 30
-#		else
-#			return 31
-#		end
-#	end
-#
-#  def test_is_not_sunday
-#    sunday = sunday?(1900, 1, 1)
-#		assert !sunday
-#  end
-#
-#	def test_is_sunday
-#		sunday = sunday?(1900, 1, 7)
-#		assert sunday
-#	end
-#end
