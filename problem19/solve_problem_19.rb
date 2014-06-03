@@ -13,15 +13,11 @@ class SundayCalculator
   end
 
   def first_sunday(year)
-    if year == 1900
-      7
-    else
-      diff = year - 1900 + leap_year_count(year)
-      if diff > 6
-        diff = diff % 7
-      end
-      7 - diff
+    diff = year - 1900 + leap_year_count(year)
+    if diff > 6
+      diff = diff % 7
     end
+    7 - diff
   end
 
   def leap_year_count(year)
