@@ -151,5 +151,14 @@ describe SundayCalculator do
     
   end
 
+  context '#solve' do 
+    it 'should return correct answer' do 
+      count = 0
+      (1901..2000).each do |year|
+        count += calc.count_first_sundays(year)  
+      end
+      puts "Counted #{count} first Sundays."
+    end
+  end
 
 end
