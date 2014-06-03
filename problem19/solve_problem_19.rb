@@ -16,7 +16,8 @@ class SundayCalculator
     if year == 1900
       7
     else
-      0
+      diff = year - 1900
+      7 - diff
     end
   end
 
