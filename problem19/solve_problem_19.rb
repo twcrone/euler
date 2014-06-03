@@ -64,7 +64,7 @@ describe SundayCalculator do
     
   end
   
-  context '#first_sunday?' do
+  context '#first_sunday' do
     [
       # year, expected_first_sunday
       [ 1900,  7 ],
