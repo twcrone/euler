@@ -157,7 +157,7 @@ describe SundayCalculator do
       (1901..2000).each do |year|
         count += calc.count_first_sundays(year)  
       end
-      puts "Counted #{count} first Sundays."
+      expect(count).to eq(171)
     end
   end
 
