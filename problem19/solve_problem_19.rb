@@ -74,6 +74,9 @@ describe SundayCalculator do
       [ 1904,  3 ],
       [ 1905,  1 ],
       [ 1906,  7 ],
+      [ 2000,  2 ],
+      [ 2001,  7 ],
+      [ 2002,  6 ],
 
     ].each do | year, expected |
       it "#{year}'s first Sunday was January #{expected}" do
