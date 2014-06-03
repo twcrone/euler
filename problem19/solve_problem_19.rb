@@ -30,6 +30,10 @@ class SundayCalculator
     count
   end
 
+  def first_day_of_month?(year, day_of_year)
+    true    
+  end
+
 end
 
 describe SundayCalculator do
@@ -90,5 +94,20 @@ describe SundayCalculator do
     end
     
   end
+
+  context '#first_day_of_month?' do
+    [
+      # year, day_of_year, expected_first_day_of_month
+      [ 1900,  1, true ],
+
+    ].each do | year, day_of_year, expected |
+      it "#{year}'s #{day_of_year} was #{'NOT' unless expected} first day of a month" do
+        actual = calc.first_day_of_month?(year, day_of_year)
+        expect(actual).to eq(expected)
+      end
+    end
+    
+  end
+
 
 end
