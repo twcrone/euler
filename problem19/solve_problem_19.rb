@@ -30,8 +30,11 @@ class SundayCalculator
     count
   end
 
+  FIRST_DAYS = [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335]
+  FIRST_DAYS_LEAP_YEAR = [1, 32, 61, 92, 122, 153, 183, 214, 245, 275, 306, 336]
+
   def first_day_of_month?(year, day_of_year)
-    true    
+    FIRST_DAYS.index(day_of_year) != nil
   end
 
 end
@@ -99,6 +102,11 @@ describe SundayCalculator do
     [
       # year, day_of_year, expected_first_day_of_month
       [ 1900,  1, true ],
+      [ 1900,  2, false ],
+      [ 1900,  32, true ],
+      [ 1900,  33, false ],
+      [ 1900,  59, false ],
+      [ 1900,  60, true ],
 
     ].each do | year, day_of_year, expected |
       it "#{year}'s #{day_of_year} was #{'NOT' unless expected} first day of a month" do
