@@ -1,22 +1,21 @@
 
 class SundayCalculator
+  
+  FIRST_DAYS = [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335]
+  FIRST_DAYS_LEAP_YEAR = [1, 32, 61, 92, 122, 153, 183, 214, 245, 275, 306, 336]
+
   def sunday?(year, month, day)
     (day - first_sunday(year)) % 7 == 0
   end
 
   def leap_year?(year)
-    if year % 100 == 0
-      year % 400 == 0
-    else
-      year % 4 == 0
-    end
+    return year % 4 == 0 unless year % 100 == 0
+    year % 400 == 0
   end
 
   def first_sunday(year)
     diff = year - 1900 + leap_year_count(year)
-    if diff > 6
-      diff = diff % 7
-    end
+    diff %= 7 unless diff < 7
     7 - diff
   end
 
@@ -30,21 +29,14 @@ class SundayCalculator
     count
   end
 
-  FIRST_DAYS = [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335]
-  FIRST_DAYS_LEAP_YEAR = [1, 32, 61, 92, 122, 153, 183, 214, 245, 275, 306, 336]
-
   def first_day_of_month?(year, day_of_year)
-    if leap_year?(year)
-      FIRST_DAYS_LEAP_YEAR.index(day_of_year) != nil
-    else      
-      FIRST_DAYS.index(day_of_year) != nil
-    end
+    return FIRST_DAYS.index(day_of_year) != nil unless leap_year?(year)
+    FIRST_DAYS_LEAP_YEAR.index(day_of_year) != nil
   end
 
   def count_first_sundays(year)
     count = 0
     day = first_sunday(year)
-
     while day < 365
       if first_day_of_month?(year, day)
         count = count + 1
