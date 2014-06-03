@@ -37,6 +37,18 @@ class SundayCalculator
     FIRST_DAYS.index(day_of_year) != nil
   end
 
+  def count_first_sundays(year)
+    count = 0
+    day = first_sunday(year)
+
+    while day < 365
+      if first_day_of_month?(year, day)
+        count = count + 1
+      end
+      day = day + 7
+    end
+    count
+  end
 end
 
 describe SundayCalculator do
@@ -111,6 +123,19 @@ describe SundayCalculator do
     ].each do | year, day_of_year, expected |
       it "#{year}'s #{day_of_year} was #{'NOT' unless expected} first day of a month" do
         actual = calc.first_day_of_month?(year, day_of_year)
+        expect(actual).to eq(expected)
+      end
+    end
+  end
+
+  context '#count_first_sundays' do
+    [
+      # year, day_of_year, expected_first_day_of_month
+      [ 1900,  2 ],
+
+    ].each do | year, expected |
+      it "#{year} had #{expected} first Sundays" do
+        actual = calc.count_first_sundays(year)
         expect(actual).to eq(expected)
       end
     end
