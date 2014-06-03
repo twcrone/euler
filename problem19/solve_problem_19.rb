@@ -1,6 +1,6 @@
 
 class SundayCalculator
-  
+
   FIRST_DAYS = [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335]
   FIRST_DAYS_LEAP_YEAR = [1, 32, 61, 92, 122, 153, 183, 214, 245, 275, 306, 336]
 
@@ -23,7 +23,7 @@ class SundayCalculator
     count = 0
     1900.upto(year - 1) do |year|
       if leap_year?(year)
-        count = count + 1
+        count += 1
       end
     end
     count
@@ -39,9 +39,9 @@ class SundayCalculator
     day = first_sunday(year)
     while day < 365
       if first_day_of_month?(year, day)
-        count = count + 1
+        count += 1
       end
-      day = day + 7
+      day += 7
     end
     count
   end
