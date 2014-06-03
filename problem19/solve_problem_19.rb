@@ -18,7 +18,11 @@ class SundayCalculator
     else
       diff = year - 1900
       leap_year_count = ((diff-1)/4).floor
-      7 - diff - leap_year_count
+      diff = diff + leap_year_count
+      if diff > 6
+        diff = diff % 7
+      end
+      7 - diff
     end
   end
 
@@ -69,6 +73,7 @@ describe SundayCalculator do
       [ 1903,  4 ],
       [ 1904,  3 ],
       [ 1905,  1 ],
+      [ 1906,  7 ],
 
     ].each do | year, expected |
       it "#{year}'s first Sunday was January #{expected}" do
