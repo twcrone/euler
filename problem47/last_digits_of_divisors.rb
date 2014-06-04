@@ -2,7 +2,14 @@
 class LastDigitsOfDivisors
 
   def find(n, d)
-    3
+    divisors = divisors(n)
+    count = 0
+    divisors.each do |val|
+      if val.to_s.end_with?(d.to_s)
+        count += 1
+      end
+    end
+    count
   end
 
   def factorial(n)
