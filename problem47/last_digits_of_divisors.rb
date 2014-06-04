@@ -1,8 +1,3 @@
-def factorial(n)
-  n.downto(1).inject(:*)
-end
-
-
 class LastDigitsOfDivisors
 
   def factorial(n)
@@ -36,14 +31,14 @@ class LastDigitsOfDivisors
     divisors
   end
 
-  def solve(n, d, factorial = false)
-    if factorial
+  def solve(n, d, do_factorial = false)
+    if do_factorial
       n = n.downto(1).inject(:*)
     end
-    
+
     count = 0
     (1..n).each do |i|
-      if n % i == 0 && val.to_s.end_with?(d.to_s)
+      if n % i == 0 && i.to_s.end_with?(d.to_s)
         count += 1
       end
     end
@@ -56,60 +51,19 @@ describe LastDigitsOfDivisors do
 
   let(:calc) { LastDigitsOfDivisors.new() }
 
-  context "#find" do
+  context "#solve" do
     [
-      # integer n, digits d, expected
-      [ 84, 4, 3],
-      [ 12, 3, 1],
+      # integer n, digits d, factorial, expected
+      [ 84, 4, false, 3],
+      [ 12, 3, false, 1],
+      [ 12, 12, true, 11],
 
-    ].each do | n, d, expected |
-      it "should return #{expected} for n=#{n} and d=#{d}" do
-        actual = calc.find(n, d)
+    ].each do | n, d, do_factorial, expected |
+      it "should return #{expected} for n=#{n} and d=#{d} factorial=#{do_factorial}" do
+        actual = calc.solve(n, d, do_factorial)
         expect(actual).to eq(expected)
       end
     end
   end
 
-  context "#find" do
-    [
-      # integer n, digits d, expected
-      [ 84, 4, 3],
-      [ 12, 3, 1],
-
-    ].each do | n, d, expected |
-      it "should return #{expected} for n=#{n} and d=#{d}" do
-        actual = calc.find(n, d)
-        expect(actual).to eq(expected)
-      end
-    end
-  end
-
-  context "#find!" do
-    [
-      # integer n, digits d, expected
-      [ 12, 12, 11],
-      # [ factorial(50), 123, 17888],
-
-    ].each do | n, d, expected |
-      it "should return #{expected} for n=#{n} and d=#{d}" do
-        actual = calc.find!(n, d)
-        expect(actual).to eq(expected)
-      end
-    end
-  end
-
-  context "#divisors" do
-    [
-      # integer n, digits d, expected
-      [ 84, [1, 2, 3, 4, 6, 7, 12, 14, 21, 28, 42, 84]],
-      # [ factorial(12),  12,    11],
-      # [ factorial(50), 123, 17888],
-
-    ].each do | n, divisors |
-      it "should return #{divisors} for n=#{n}" do
-        actual = calc.divisors(n)
-        expect(actual).to eq(divisors)
-      end
-    end
-  end
 end
