@@ -1,5 +1,5 @@
 class Test extends GroovyTestCase {
-	
+
 	def isPrime(BigInteger num, primes) {
 		//def factor = primes.find{ num.mod(it) == BigInteger.ZERO }
 		def factor = findFactor(num, primes)
@@ -9,12 +9,12 @@ class Test extends GroovyTestCase {
 		}
 		isPrime
 	}
-	
+
 	def findFactor(BigInteger num, primes) {
 		if(primes.isEmpty()) {
 			return null
 		}
-		
+
 		def i = 0
 		BigInteger f = primes[i]
 		def max = num.add(BigInteger.ONE)
@@ -32,11 +32,11 @@ class Test extends GroovyTestCase {
 		def primes = []
 		def i = new BigInteger("2")
 		def sum = BigInteger.ZERO
-		
+
 		while(i.compareTo(max) == -1) {
 			if(isPrime(i, primes)) {
 				sum = sum.add(i)
-				println "$i - $sum"
+				//println "$i - $sum"
 			}
 			i = i.add(BigInteger.ONE)
 		}
@@ -46,15 +46,15 @@ class Test extends GroovyTestCase {
 	def sumPrimesBelowCheat(BigInteger num) {
 		def next = new BigInteger("2")
 		def sum = BigInteger.ZERO
-		
+
 		while(next.compareTo(num) == -1) {
-			println "$next - $sum"
+			//println "$next - $sum"
 			sum = sum.add(next)
 			next = next.nextProbablePrime()
 		}
 		sum
 	}
-		
+
 	void test_solve() {
 		println "Answer is" + sumPrimesBelow(2000000)
 		println "Answer should be 142913828922"
@@ -64,7 +64,7 @@ class Test extends GroovyTestCase {
 		def primes = [2,3,5,7]
 		assertFalse isPrime(9, primes)
 	}
-	
+
   	void test_is_prime_optimized_true() {
 		def primes = [2,3,5,7]
 		def eleven = new BigInteger("11")
@@ -81,7 +81,7 @@ class Test extends GroovyTestCase {
 		def primes = [2,3,5,7]
 		assertFalse isPrime(9, primes)
 	}
-	
+
 	void test_sum_primes_below_10() {
 		def sum = sumPrimesBelow(10)
 		assertEquals 17, sum
