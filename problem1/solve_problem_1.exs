@@ -1,16 +1,13 @@
 defmodule EulerProblemOne do
 
-  def solve(1), do: IO.puts(1)
-
-  def solve(n) do
-    IO.puts output(n, rem(n, 5) == 0, rem(n, 3) == 0)
-    solve(n - 1)
+  def calculate(3), do: 3
+  def calculate(n) do
+    calculate(n - 1) + filter(n)
   end
 
-  def output(_, true, true), do: "FizzBuzz"
-  def output(_, true, false), do: "Fizz"
-  def output(_, false, true), do: "Buzz"
-  def output(n, _, _), do: n
+  def filter(n) when rem(n, 3) == 0 or rem(n, 5) == 0, do: n
+  def filter(_), do: 0
 end
 
-EulerProblemOne.solve(100)
+answer = EulerProblemOne.calculate(999)
+IO.puts(answer)
