@@ -28,8 +28,12 @@ defmodule Problem3Test do
     assert Problem3Test.is_factor_of?(3, 4) == false
   end
 
-  test "is prime" do
+  test "is prime base case" do
   	assert Problem3Test.is_prime?(2)
+  end
+
+  test "is prime" do
+  	assert Problem3Test.is_prime?(5)
   end
 
   test "is not prime" do
