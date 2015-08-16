@@ -13,10 +13,6 @@ def is_prime(num)
   return true
 end
 
-def is_factor_of(num, base)
-  base % num == 0
-end
-
 num = 600851475143
 factor = 0
 temp = num
