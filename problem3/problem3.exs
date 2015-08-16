@@ -29,15 +29,27 @@ defmodule Problem3Test do
   end
 
   def get_largest_prime_factor(num) do
-  	Problem3Test.get_largest_prime_factor(num, 1, 2)
+  	Problem3Test.get_largest_prime_factor(num, 2)
   end
 
-  def get_largest_prime_factor(num, current_factor, next_candidate) do
-  	cond do
-  		next_candidate > num / 2 -> current_factor
-  	 	Problem3Test.is_prime_factor_of?(next_candidate, num) -> Problem3Test.get_largest_prime_factor(num, next_candidate, next_candidate + 1)
-  		true -> Problem3Test.get_largest_prime_factor(num, current_factor, next_candidate + 1)
+  def get_largest_prime_factor(num, divisor) do
+  	if Kernel.rem(num, divisor) == 0 do
+  		next_candidate = Kernel.div(num, divisor)
+  		#IO.puts("#{num}, #{divisor}, #{next_candidate}")
+  		if Problem3Test.is_prime?(next_candidate) do
+  			next_candidate
+  		else
+  			Problem3Test.get_largest_prime_factor(num, divisor + 1)
+  		end
+  	else
+		Problem3Test.get_largest_prime_factor(num, divisor + 1)
   	end
+  end
+
+  test "get largest prime factor for 600851475143" do
+  	answer = Problem3Test.get_largest_prime_factor(600851475143)
+  	IO.puts "Answer is #{answer}"
+  	assert answer > 0
   end
 
   test "get largest prime factor" do
