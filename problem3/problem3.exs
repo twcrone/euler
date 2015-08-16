@@ -40,4 +40,8 @@ defmodule Problem3Test do
   	assert Problem3Test.is_prime?(4) == false
   end
 
+  test "is not prime" do
+  	assert Problem3Test.is_prime?(333) == false
+  end
+
 end
