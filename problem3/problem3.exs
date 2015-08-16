@@ -7,12 +7,33 @@ defmodule Problem3Test do
   	Kernel.rem(base, num) == 0
   end
 
-  test "stating something" do
+  def is_prime?(num, factor) do
+  	cond do
+  	  num == 2 -> true
+	  Problem3Test.is_factor_of?(factor, num) -> false
+	  factor < (num/factor) -> is_prime?(num, factor + 1)
+	  true -> true
+	end
+  end  
+
+  def is_prime?(num) do
+  	Problem3Test.is_prime?(num, 2)
+  end
+
+  test "is a factor" do
     assert Problem3Test.is_factor_of?(2, 4)
   end
 
-  test "stating something" do
+  test "is not a factor" do
     assert Problem3Test.is_factor_of?(3, 4) == false
+  end
+
+  test "is prime" do
+  	assert Problem3Test.is_prime?(2)
+  end
+
+  test "is not prime" do
+  	assert Problem3Test.is_prime?(4) == false
   end
 
 end
