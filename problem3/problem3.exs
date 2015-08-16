@@ -33,7 +33,7 @@ defmodule Problem3Test do
   end
 
   def get_largest_prime_factor(num, divisor) do
-  	if Kernel.rem(num, divisor) == 0 do
+  	if Problem3Test.is_factor_of(divisor, num) do
   		next_candidate = Kernel.div(num, divisor)
   		#IO.puts("#{num}, #{divisor}, #{next_candidate}")
   		if Problem3Test.is_prime?(next_candidate) do
