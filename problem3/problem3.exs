@@ -7,6 +7,14 @@ defmodule Problem3Test do
   	Kernel.rem(base, num) == 0
   end
 
+  def is_prime_factor_of?(num, base) do
+  	if Problem3Test.is_prime?(num) do
+  		Problem3Test.is_factor_of?(num, base)
+  	else
+  		false
+  	end
+  end
+
   def is_prime?(num, factor) do
   	cond do
   	  num == 2 -> true
@@ -18,6 +26,25 @@ defmodule Problem3Test do
 
   def is_prime?(num) do
   	Problem3Test.is_prime?(num, 2)
+  end
+
+  def get_largest_prime_factor(num) do
+  	Problem3Test.get_largest_prime_factor(num, 1, 2)
+  end
+
+  def get_largest_prime_factor(num, current_factor, next_candidate) do
+  	cond do
+  		next_candidate > num / 2 -> current_factor
+  	 	Problem3Test.is_prime_factor_of?(next_candidate, num) -> Problem3Test.get_largest_prime_factor(num, next_candidate, next_candidate + 1)
+  		true -> Problem3Test.get_largest_prime_factor(num, current_factor, next_candidate + 1)
+  	end
+  end
+
+  test "get largest prime factor" do
+  	assert Problem3Test.is_prime?(29)
+  	assert Problem3Test.is_factor_of?(29, 13195)
+  	assert Problem3Test.is_prime_factor_of?(29, 13195)
+  	assert Problem3Test.get_largest_prime_factor(13195) == 29
   end
 
   test "is a factor" do
@@ -40,7 +67,7 @@ defmodule Problem3Test do
   	assert Problem3Test.is_prime?(4) == false
   end
 
-  test "is not prime" do
+  test "is not prime more in depth" do
   	assert Problem3Test.is_prime?(333) == false
   end
 
