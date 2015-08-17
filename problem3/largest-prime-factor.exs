@@ -1,6 +1,6 @@
 ExUnit.start
 
-defmodule Problem3Test do
+defmodule LargestPrimeFactor do
   use ExUnit.Case, async: true
 
   def is_factor_of?(factor, num) do
@@ -28,7 +28,7 @@ defmodule Problem3Test do
   	is_prime?(num, 2)
   end
 
-  def get_largest_prime_factor(num) do
+  def calculate_for(num) do
   	get_largest_prime_factor(num, 2)
   end
 
@@ -46,7 +46,7 @@ defmodule Problem3Test do
   end
 
   test "get largest prime factor for 600851475143" do
-  	answer = get_largest_prime_factor(600851475143)
+  	answer = calculate_for(600851475143)
   	IO.puts "Answer is #{answer}"
   	assert answer > 0
   end
@@ -55,7 +55,7 @@ defmodule Problem3Test do
   	assert is_prime?(29)
   	assert is_factor_of?(29, 13195)
   	assert is_prime_factor_of?(29, 13195)
-  	assert get_largest_prime_factor(13195) == 29
+  	assert calculate_for(13195) == 29
   end
 
   test "is a factor" do
