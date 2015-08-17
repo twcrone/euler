@@ -35,7 +35,6 @@ defmodule Problem3Test do
   defp get_largest_prime_factor(num, divisor) do
   	if is_factor_of?(divisor, num) do
   		next_candidate = Kernel.div(num, divisor)
-  		#IO.puts("#{num}, #{divisor}, #{next_candidate}")
   		if is_prime?(next_candidate) do
   			next_candidate
   		else
@@ -80,7 +79,7 @@ defmodule Problem3Test do
   end
 
   test "is not prime more in depth" do
-  	assert is_prime?(333) == false
+  	assert is_prime?(121) == false
   end
 
 end
