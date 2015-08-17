@@ -3,13 +3,13 @@ ExUnit.start
 defmodule Problem3Test do
   use ExUnit.Case, async: true
 
-  def is_factor_of?(num, base) do
-  	Kernel.rem(base, num) == 0
+  def is_factor_of?(factor, num) do
+  	Kernel.rem(num, factor) == 0
   end
 
-  def is_prime_factor_of?(num, base) do
-  	if is_prime?(num) do
-  		is_factor_of?(num, base)
+  def is_prime_factor_of?(factor, num) do
+  	if is_prime?(factor) do
+  		is_factor_of?(factor, num)
   	else
   		false
   	end
