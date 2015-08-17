@@ -55,10 +55,8 @@ defmodule LargestPrimeFactor do
 
   defp is_prime?(num) when rem(num, 2) == 0, do: false
 
-  defp is_prime?(num) do
-    is_prime?(num, 2)
-  end
-
+  defp is_prime?(num), do: is_prime?(num, 2)
+  
   defp is_prime?(num, factor) do
   	cond do
       is_factor_of?(factor, num) -> false
