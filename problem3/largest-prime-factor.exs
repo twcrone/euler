@@ -3,6 +3,23 @@ ExUnit.start
 defmodule LargestPrimeFactor do
   use ExUnit.Case, async: true
 
+  def calculate_for(num) do
+    get_largest_prime_factor(num, 2)
+  end
+
+  defp get_largest_prime_factor(num, divisor) do
+    if is_factor_of?(divisor, num) do
+      next_candidate = Kernel.div(num, divisor)
+      if is_prime?(next_candidate) do
+        next_candidate
+      else
+        get_largest_prime_factor(num, divisor + 1)
+      end
+    else
+    get_largest_prime_factor(num, divisor + 1)
+    end
+  end
+
   def is_factor_of?(factor, num) do
   	Kernel.rem(num, factor) == 0
   end
@@ -15,6 +32,10 @@ defmodule LargestPrimeFactor do
   	end
   end
 
+  def is_prime?(num) do
+    is_prime?(num, 2)
+  end
+
   defp is_prime?(num, factor) do
   	cond do
   	  num == 2 -> true
@@ -23,27 +44,6 @@ defmodule LargestPrimeFactor do
 	    true -> true
     end
   end  
-
-  def is_prime?(num) do
-  	is_prime?(num, 2)
-  end
-
-  def calculate_for(num) do
-  	get_largest_prime_factor(num, 2)
-  end
-
-  defp get_largest_prime_factor(num, divisor) do
-  	if is_factor_of?(divisor, num) do
-  		next_candidate = Kernel.div(num, divisor)
-  		if is_prime?(next_candidate) do
-  			next_candidate
-  		else
-  			get_largest_prime_factor(num, divisor + 1)
-  		end
-  	else
-		get_largest_prime_factor(num, divisor + 1)
-  	end
-  end
 
   test "get largest prime factor for 600851475143" do
   	answer = calculate_for(600851475143)
