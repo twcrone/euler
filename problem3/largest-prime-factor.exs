@@ -31,15 +31,11 @@ defmodule LargestPrimeFactor do
   end
 
   defp get_largest_prime_factor(num, divisor) do
-    if is_factor_of?(divisor, num) do
-      next_candidate = div(num, divisor)
-      if is_prime?(next_candidate) do
-        next_candidate
-      else
-        get_largest_prime_factor(num, divisor + 1)
-      end
+    next_candidate = div(num, divisor)
+    if is_factor_of?(divisor, num) && is_prime?(next_candidate) do
+      next_candidate
     else
-    get_largest_prime_factor(num, divisor + 1)
+        get_largest_prime_factor(num, divisor + 1)
     end
   end
 
@@ -55,13 +51,16 @@ defmodule LargestPrimeFactor do
   	end
   end
 
+  defp is_prime?(2), do: true
+
+  defp is_prime?(num) when rem(num, 2) == 0, do: false
+
   defp is_prime?(num) do
     is_prime?(num, 2)
   end
 
   defp is_prime?(num, factor) do
   	cond do
-  	  num == 2 -> true
       is_factor_of?(factor, num) -> false
 	    factor < (num/factor) -> is_prime?(num, factor + 1)
 	    true -> true
