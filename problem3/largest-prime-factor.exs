@@ -52,15 +52,11 @@ defmodule LargestPrimeFactor do
   end
 
   defp is_prime?(2), do: true
-
   defp is_prime?(num) when rem(num, 2) == 0, do: false
-
   defp is_prime?(num), do: is_prime?(num, 2)
   
   defp is_prime?(num, factor) when rem(num, factor) == 0, do: false
-
   defp is_prime?(num, factor) when factor < (num/factor), do: is_prime?(num, factor + 1)
-
   defp is_prime?(_num, _factor), do: true
 
   # Tests
