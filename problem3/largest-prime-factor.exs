@@ -6,7 +6,7 @@ defmodule LargestPrimeFactor do
   @moduledoc """
 
   Project Euler
-  
+
   Largest prime factor
   Problem 3
 
@@ -32,7 +32,7 @@ defmodule LargestPrimeFactor do
 
   defp get_largest_prime_factor(num, divisor) do
     if is_factor_of?(divisor, num) do
-      next_candidate = Kernel.div(num, divisor)
+      next_candidate = div(num, divisor)
       if is_prime?(next_candidate) do
         next_candidate
       else
@@ -44,7 +44,7 @@ defmodule LargestPrimeFactor do
   end
 
   defp is_factor_of?(factor, num) do
-  	Kernel.rem(num, factor) == 0
+  	rem(num, factor) == 0
   end
 
   defp is_prime_factor_of?(factor, num) do
