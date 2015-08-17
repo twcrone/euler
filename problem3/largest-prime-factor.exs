@@ -3,6 +3,29 @@ ExUnit.start
 defmodule LargestPrimeFactor do
   use ExUnit.Case, async: true
 
+  @moduledoc """
+
+  Project Euler
+  
+  Largest prime factor
+  Problem 3
+
+  The prime factors of 13195 are 5, 7, 13 and 29.
+
+  What is the largest prime factor of the number 600851475143 ?
+  
+  https://projecteuler.net/problem=3
+
+  ## Example
+
+    iex> LargestPrimeFactor.calculate_for(13195)
+    29
+
+  """
+
+  @doc """
+  Calculates the largest prime factor for a number.
+  """
   def calculate_for(num) do
     get_largest_prime_factor(num, 2)
   end
@@ -20,11 +43,11 @@ defmodule LargestPrimeFactor do
     end
   end
 
-  def is_factor_of?(factor, num) do
+  defp is_factor_of?(factor, num) do
   	Kernel.rem(num, factor) == 0
   end
 
-  def is_prime_factor_of?(factor, num) do
+  defp is_prime_factor_of?(factor, num) do
   	if is_prime?(factor) do
   		is_factor_of?(factor, num)
   	else
@@ -32,7 +55,7 @@ defmodule LargestPrimeFactor do
   	end
   end
 
-  def is_prime?(num) do
+  defp is_prime?(num) do
     is_prime?(num, 2)
   end
 
@@ -44,6 +67,8 @@ defmodule LargestPrimeFactor do
 	    true -> true
     end
   end  
+
+  # Tests
 
   test "get largest prime factor for 600851475143" do
   	answer = calculate_for(600851475143)
