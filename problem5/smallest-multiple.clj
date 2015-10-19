@@ -12,7 +12,6 @@
   (loop [candidate (* top 2)]
     (if (not (solution? candidate top))
       (do 
-        (println (+ candidate top))
         (recur (+ candidate top)))
       candidate)))
   
@@ -21,5 +20,6 @@
 ;   (= (solve 10) 2520))
 
 ; (run-tests 'smallest-multiple)
+(println "Solution for 10 is " (solve 10))
 
-(solve 20)
+(println "Solution for 20 is " (solve 20))
