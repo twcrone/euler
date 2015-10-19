@@ -6,9 +6,9 @@
 (defn is-divisible-by? [n d]
   (= (mod n d) 0))
 
-(defn solve [] (every? (partial is-divisible-by? 100) nums))
+(defn solve [n] (every? (partial is-divisible-by? n) nums))
 
 (deftest base-case
-  (is (solve)))
+  (is (solve 2520)))
 
 (run-tests 'smallest-multiple)
