@@ -15,23 +15,31 @@
 ;
 ; Solution by twcrone
 
-(defn is-divisible-by? [n d]
+(defn divisible-by? [n d]
   (= (mod n d) 0))
 
 (defn solution? [n top]
   (let [nums (range 1 top)] 
-    (every? (partial is-divisible-by? n) nums)))
+    (every? (partial divisible-by? n) nums)))
 
 (defn solve [top]
-  (loop [candidate (* top 2)]
+  (loop [candidate top]
     (if (not (solution? candidate top))
-      (do 
-        (recur (+ candidate top)))
+      (recur (+ candidate top))
       candidate)))
   
 
 (deftest base-case
-  (= (solve 10) 2520))
+  (is (= (solve 10) 2520)))
+
+(deftest solve-for-1
+  (is (= (solve 1) 1)))
+
+(deftest solve-for-5
+  (is (= (solve 5) 60)))
+
+(deftest solve-for-15
+  (is (= (solve 15) 360360)))
 
 (run-tests 'smallest-multiple)
 
