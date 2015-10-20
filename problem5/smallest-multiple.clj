@@ -27,7 +27,9 @@
     (if (not (solution? candidate top))
       (recur (+ candidate top))
       candidate)))
-  
+ 
+
+; tests
 
 (deftest base-case
   (is (= (solve 10) 2520)))
@@ -42,6 +44,9 @@
   (is (= (solve 15) 360360)))
 
 (run-tests 'smallest-multiple)
+
+
+; main
 
 (println "------------------------------")
 (println "Solving for 20...")
