@@ -7,7 +7,7 @@
 
 (defn square-sum [upper]
   (let [sum (reduce + (range (+ upper 1)))]
-    (* sum sum)))
+    (square sum)))
 
 (defn diff-sums [upper]
   (- (square-sum upper) (sum-squares upper)))
