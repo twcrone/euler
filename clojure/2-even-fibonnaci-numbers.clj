@@ -20,8 +20,8 @@
 (def four-mil (* 4 1000000))
 
 (defn fib [i j sum]
-  (if (> j four-mil)
-    (println sum)
-    (fib j (+ i j) (if (even? j) (+ sum j) sum))))
+  (if (< j four-mil)
+    (fib j (+ i j) (if (even? j) (+ sum j) sum))
+    sum))
 
-(fib 1 2 0)
+(println (fib 1 2 0))
