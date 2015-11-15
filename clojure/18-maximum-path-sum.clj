@@ -12,18 +12,30 @@
 
 (defn add-rows
   [a b]
-  (map + a b))
+  (if (empty? a)
+    b
+    (if (empty? b)
+      a
+      (map + a b))))
 
 (reduce-row [8 5 9 3])
 
-(add-rows [1 2 3] [1 3 1])
+(add-rows [7 4] (reduce-row [2 4 6]))
 
 
-(defn solve-for [data] 23)
+(defn solve-for
+  [data]
+  (loop [src (vec (reverse data))
+         sol []]
+    (if (= (count src) 1)
+      (+ (first sol) (first (first src)))
+      (recur (rest src) (reduce-row (add-rows (first src) sol))))))
+
+(solve-for [[3] [7 4] [2 4 6] [8 5 9 3]])
 
 ; test
 (deftest base-case
-  (is (= (solve-for [3 7 4 2 4 6 8 9 3]) 23)))
+  (is (= (solve-for [[3] [7 4] [2 4 6] [8 5 9 3]]) 23)))
 
 (deftest reduce-row-test
   (is (= (reduce-row [8 5 9 3]) [8 9 9])))
