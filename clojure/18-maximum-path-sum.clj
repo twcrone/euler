@@ -1,5 +1,6 @@
 (ns max-path-sum-1)
 (use 'clojure.test)
+(require '[clojure.string :as str])
 
 (defn reduce-row [values]
   (loop [src values
@@ -24,7 +25,14 @@
       (+ (first sol) (first (first src)))
       (recur (rest src) (reduce-row (add-rows (first src) sol))))))
 
-(solve-for [[3] [7 4] [2 4 6] [8 5 9 3]])
+(defn parse-int [s]
+  (Integer. (re-find #"[0-9]*" s)))
+
+(defn load-data []
+  (with-open [rdr (clojure.java.io/reader "/Users/toddcrone/work/twcrone/active/euler/clojure/18-test-data")]
+    (map #(map parse-int (str/split % #" ")) (vec (line-seq rdr)))))
+
+(solve-for (load-data))
 
 ; test
 (deftest base-case
