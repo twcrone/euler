@@ -29,7 +29,7 @@
   (Integer. (re-find #"[0-9]*" s)))
 
 (defn load-data []
-  (with-open [rdr (clojure.java.io/reader "/Users/toddcrone/work/twcrone/active/euler/clojure/18-test-data")]
+  (with-open [rdr (clojure.java.io/reader "/Users/toddcrone/work/twcrone/active/euler/clojure/67-test-data")]
     (map #(map parse-int (str/split % #" ")) (vec (line-seq rdr)))))
 
 (solve-for (load-data))
