@@ -10,7 +10,14 @@
       dest
       (recur (rest src) (conj dest (max (first src) (second src)))))))
 
+(defn add-rows
+  [a b]
+  (map + a b))
+
 (reduce-row [8 5 9 3])
+
+(add-rows [1 2 3] [1 3 1])
+
 
 (defn solve-for [data] 23)
 
@@ -20,5 +27,8 @@
 
 (deftest reduce-row-test
   (is (= (reduce-row [8 5 9 3]) [8 9 9])))
+
+(deftest add-rows-test
+  (is (= (add-rows [1 2 3] [1 3 1]) [2 5 4])))
 
 (run-tests 'max-path-sum-1)
