@@ -1,8 +1,6 @@
 (ns max-path-sum-1)
 (use 'clojure.test)
 
-(def base-data (list 3 7 4 2 4 6 8 9 3))
-
 (defn reduce-row [values]
   (loop [src values
         dest []]
@@ -17,11 +15,6 @@
     (if (empty? b)
       a
       (map + a b))))
-
-(reduce-row [8 5 9 3])
-
-(add-rows [7 4] (reduce-row [2 4 6]))
-
 
 (defn solve-for
   [data]
