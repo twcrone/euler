@@ -1,4 +1,4 @@
-(ns max-path-sum-1)
+(ns max-path-sum)
 (use 'clojure.test)
 (require '[clojure.string :as str])
 
@@ -28,11 +28,10 @@
 (defn parse-int [s]
   (Integer. (re-find #"[0-9]*" s)))
 
-(defn load-data []
-  (with-open [rdr (clojure.java.io/reader "/Users/toddcrone/work/twcrone/active/euler/clojure/67-test-data")]
+(defn load-data [filename]
+  (with-open [rdr (clojure.java.io/reader filename)]
     (map #(map parse-int (str/split % #" ")) (vec (line-seq rdr)))))
 
-(solve-for (load-data))
 
 ; test
 (deftest base-case
@@ -44,4 +43,11 @@
 (deftest add-rows-test
   (is (= (add-rows [1 2 3] [1 3 1]) [2 5 4])))
 
-(run-tests 'max-path-sum-1)
+(run-tests 'max-path-sum)
+
+
+; main
+
+(println "Solution for #18 is " (solve-for (load-data "18-test-data")))
+(println "Solution for #67 is " (solve-for (load-data "67-test-data")))
+
